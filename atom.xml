@@ -5,9 +5,9 @@
   <subtitle>你猜~的博客</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://yoursite.com/"/>
+  <link href="https://xiaokegege.github.io/"/>
   <updated>2018-07-18T06:58:29.321Z</updated>
-  <id>http://yoursite.com/</id>
+  <id>https://xiaokegege.github.io/</id>
   
   <author>
     <name>luoke</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>test</title>
-    <link href="http://yoursite.com/2018/07/18/test/"/>
-    <id>http://yoursite.com/2018/07/18/test/</id>
+    <link href="https://xiaokegege.github.io/test/"/>
+    <id>https://xiaokegege.github.io/test/</id>
     <published>2018-07-18T06:58:29.000Z</published>
     <updated>2018-07-18T06:58:29.321Z</updated>
     
@@ -32,8 +32,8 @@
   
   <entry>
     <title>Hello World</title>
-    <link href="http://yoursite.com/2018/07/17/hello-world/"/>
-    <id>http://yoursite.com/2018/07/17/hello-world/</id>
+    <link href="https://xiaokegege.github.io/hello-world/"/>
+    <id>https://xiaokegege.github.io/hello-world/</id>
     <published>2018-07-17T08:50:25.656Z</published>
     <updated>2018-07-17T08:50:25.656Z</updated>
     
