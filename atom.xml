@@ -2,30 +2,39 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>你猜~</title>
   
-  <subtitle>你猜~的博客</subtitle>
+  
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xiaokegege.github.io/"/>
-  <updated>2018-07-18T06:58:29.321Z</updated>
+  <updated>2018-09-10T08:46:43.439Z</updated>
   <id>https://xiaokegege.github.io/</id>
   
   <author>
-    <name>luoke</name>
+    <name>lk</name>
     
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>test</title>
-    <link href="https://xiaokegege.github.io/test/"/>
-    <id>https://xiaokegege.github.io/test/</id>
-    <published>2018-07-18T06:58:29.000Z</published>
-    <updated>2018-07-18T06:58:29.321Z</updated>
+    <title>checkidcard</title>
+    <link href="https://xiaokegege.github.io/checkidcard/"/>
+    <id>https://xiaokegege.github.io/checkidcard/</id>
+    <published>2018-09-10T08:14:40.000Z</published>
+    <updated>2018-09-10T08:46:43.439Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="校验身份证号逻辑与推算"><a href="#校验身份证号逻辑与推算" class="headerlink" title="校验身份证号逻辑与推算"></a>校验身份证号逻辑与推算</h1><h2 id="身份证号码的编码规则及校验"><a href="#身份证号码的编码规则及校验" class="headerlink" title="身份证号码的编码规则及校验"></a>身份证号码的编码规则及校验</h2><ul><li>身份证号码共18位，由17位本体码和1位校验码组成</li><li>前6位是地址码，表示登记户口时所在地的行政区划代码</li><li>7到14位是出生年月日，采用YYYYMMDD格式；15到17位是顺序码，表示在同一地址码所标识的区域范围内，对同年、同月、同日出生的人编订的顺序号，顺序码的奇数分配给男性，偶数分配给女性，即第17位奇数表示男性，偶数表示女性</li><li>第18位是校验码，采用ISO 7064:1983, MOD 11-2校验字符系统</li></ul><p>一代身份证与二代身份证的区别在于：</p><p>一代身份证是15位，二代身份证是18位；</p><p>一代身份证出生年月日采用YYMMDD格式，二代身份证出生年月日采用YYYYMMDD格式；</p><p>一代身份证无校验码，二代身份证有校验码。</p><h4 id="校验码计算规则"><a href="#校验码计算规则" class="headerlink" title="校验码计算规则"></a>校验码计算规则</h4><p>身份证号码中各个位置上的号码字符值应满足下列公式的校验:</p><blockquote><img src="/checkidcard/1.jpg"></blockquote><p>i表示号码字符从右至左包括校验码字符在内的位置序号；<br>ai表示第i位置上的号码字符值，a1是身份证号码第18位校验码；<br>Wi表示第i位置上的加权因子，加权因子计算公式：</p><blockquote><img src="/checkidcard/2.jpg"></blockquote><h4 id="举例说明"><a href="#举例说明" class="headerlink" title="举例说明"></a>举例说明</h4><p>以此身份证号作为参考：362401199201011009</p><table><thead><tr><th>i</th><th>18</th><th>17</th><th>16</th><th>15</th><th>14</th><th>13</th><th>12</th><th>11</th><th>10</th><th>9</th><th>8</th><th>7</th><th>6</th><th>5</th><th>4</th><th>3</th><th>2</th><th>1</th></tr></thead><tbody><tr><td>  ai</td><td>3</td><td>6</td><td>2</td><td>4</td><td>0</td><td>1</td><td>1</td><td>9</td><td>9</td><td>2</td><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>9</td></tr><tr><td>  Wi</td><td>7</td><td>9</td><td>10</td><td>5</td><td>8</td><td>4</td><td>2</td><td>1</td><td>6</td><td>3</td><td>7</td><td>9</td><td>10</td><td>5</td><td>8</td><td>4</td><td>2</td><td>1</td></tr><tr><td>ai*Wi</td><td>21</td><td>54</td><td>20</td><td>20</td><td>0</td><td>4</td><td>2</td><td>9</td><td>54</td><td>6</td><td>0</td><td>9</td><td>0</td><td>5</td><td>8</td><td>0</td><td>0</td><td>9</td></tr></tbody></table><p>a1<em>W1+a2</em>W2+…+a18*W18 = 221 ,221%11 = 1，形如下图：结果397替换为221</p><blockquote><img src="/checkidcard/3.jpg"></blockquote><p>经过推理（同余定理）：</p><blockquote><img src="/checkidcard/1.jpg"></blockquote><h2 id="实际应用"><a href="#实际应用" class="headerlink" title="实际应用"></a>实际应用</h2><p>在金融行业软件系统中，对于身份证号码的采集、校验用途甚广。</p><ol><li>身份证号码前6位，可采集客户户籍所在地，只需将国家标准GB/T 2260中定义的行政区划代码导入数据库，程序中进行映射即可；但需要注意的是，行政区划代码每隔几年会修订一次，从笔者手上的2007版来看，共经历了1982年、1984年、1986年、1988年、1991年、1995年、1999年、2002年、2007年九次修订，所以要预留更新机制；</li><li>身份证号码7到14位，可采集客户的出生日期、年龄、生日；</li><li>身份证号码17位，可采集客户的性别，奇数表示男性，偶数表示女性；</li><li>身份证号码的验证渠道，不管验证成功与否，往往都是收费的，比如银行渠道、公安部渠道，在发往这些渠道验证之前，先对其进行长度、正则表达式、校验码的验证，能够适当提高收费验证的成功率，节省成本支出；而且也可以提升用户体验，在用户输入错误时及时反馈而不必等待验证渠道结果的返回。</li></ol><h2 id="校验字符系统"><a href="#校验字符系统" class="headerlink" title="校验字符系统"></a>校验字符系统</h2><p>关于校验字符系统，其国际标准ISO 7064有2个版本，分别是ISO 7064:1983和ISO/IEC 7064:2003，从内容上来说，除了表面的调整，本质上没有区别，我想可以理解为是IEC成立后对其工作范围主权的宣示。那么，对应的国家标准，也有了2个版本，分别是GB/T 17710-1999和GB/T 17710-2008，基本上保证了对国际标准的高水准翻译水平，使英文阅读能力欠佳的读者可以通过国家标准来体会国际标准制定的严谨，并从中受益。</p><p>标准中，提供了如下几个校验字符系统，基本涵盖日常所需。身份证号码校验使用的ISO 7064, MOD 11-2，便是其中之一。在实际项目中，可按需选用。</p><table><thead><tr><th>系统类型</th><th>系统名称</th><th>适用范围</th><th>校验码数目及类型</th><th>数字表示法</th></tr></thead><tbody><tr><td>纯系统</td><td>ISO</td><td>7064,</td><td>MOD</td><td>11-2</td><td>数字</td><td>1位数字或附加符X</td><td>1</td></tr><tr><td>纯系统</td><td>ISO</td><td>7064,</td><td>MOD</td><td>37-2</td><td>字母数字</td><td>1位数字或字母或附加符*</td><td>2</td></tr><tr><td>纯系统</td><td>ISO</td><td>7064,</td><td>MOD</td><td>97-10</td><td>数字</td><td>2位数字</td><td>3</td></tr><tr><td>纯系统</td><td>ISO</td><td>7064,</td><td>MOD</td><td>661-26</td><td>字母</td><td>2位字母</td><td>4</td></tr><tr><td>纯系统</td><td>ISO</td><td>7064,</td><td>MOD</td><td>1271-36</td><td>字母数字</td><td>2位数字或字母</td><td>5</td></tr><tr><td>混合系统</td><td>ISO</td><td>7064,</td><td>MOD</td><td>11,10</td><td>数字</td><td>1位数字</td><td>6</td></tr><tr><td>混合系统</td><td>ISO</td><td>7064,</td><td>MOD</td><td>27,26</td><td>字母</td><td>1位字母</td><td>7</td></tr><tr><td>混合系统</td><td>ISO</td><td>7064,</td><td>MOD</td><td>37,36</td><td>字母数字</td><td>1位数字或字母</td><td>8</td></tr></tbody></table><p>表格中可见，校验字符系统，包括纯系统和混合系统。使用一个模数的称为纯系统，系统名称中MOD后第1个数字是模数，第2个数字是基数；使用两个模数的称为混合系统，系统名称中MOD后的2个数字都是模数。</p><h2 id="纯系统和混合系统"><a href="#纯系统和混合系统" class="headerlink" title="纯系统和混合系统"></a>纯系统和混合系统</h2><h4 id="纯系统"><a href="#纯系统" class="headerlink" title="纯系统"></a>纯系统</h4><p>纯系统又包括使用一个校验字符和使用两个校验字符。使用一个校验字符的纯系统与使用两个校验字符的纯系统本质上是相同的，都遵守校验公式：</p><blockquote><img src="/checkidcard/5.jpg"></blockquote><p>只不过，使用一个校验字符的纯系统与使用两个校验字符的纯系统在计算校验字符的方式上略有不同：</p><blockquote><img src="/checkidcard/6.jpg"></blockquote><p>纯系统有两种基本的计算方法，纯系统递归法和纯系统多项式法：</p><blockquote><img src="/checkidcard/7.jpg"></blockquote><h4 id="混合系统"><a href="#混合系统" class="headerlink" title="混合系统"></a>混合系统</h4><blockquote><img src="/checkidcard/8.jpg"></blockquote><p>代码参考：</p><p><code>CheckIdCard</code></p><p><code>ISO7064Util</code></p><p>参考地址：<a href="https://www.jianshu.com/p/ead5b08e9839" target="_blank" rel="noopener">https://www.jianshu.com/p/ead5b08e9839</a></p>]]></content>
     
     <summary type="html">
     
+      
+      
+        &lt;h1 id=&quot;校验身份证号逻辑与推算&quot;&gt;&lt;a href=&quot;#校验身份证号逻辑与推算&quot; class=&quot;headerlink&quot; title=&quot;校验身份证号逻辑与推算&quot;&gt;&lt;/a&gt;校验身份证号逻辑与推算&lt;/h1&gt;&lt;h2 id=&quot;身份证号码的编码规则及校验&quot;&gt;&lt;a href=&quot;#身份证号
+      
+    
     </summary>
+    
+      <category term="杂文" scheme="https://xiaokegege.github.io/categories/%E6%9D%82%E6%96%87/"/>
     
     
   </entry>
@@ -35,7 +44,7 @@
     <link href="https://xiaokegege.github.io/hello-world/"/>
     <id>https://xiaokegege.github.io/hello-world/</id>
     <published>2018-07-17T08:50:25.656Z</published>
-    <updated>2018-07-17T08:50:25.656Z</updated>
+    <updated>2018-09-10T08:27:17.138Z</updated>
     
     <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
     

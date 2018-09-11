@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://xiaokegege.github.io/checkidcard/</loc>
+    
+    <lastmod>2018-09-10T08:46:43.439Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaokegege.github.io/hello-world/</loc>
+    
+    <lastmod>2018-09-10T08:27:17.138Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://xiaokegege.github.io/about/index.html</loc>
     
-    <lastmod>2018-09-07T07:32:23.563Z</lastmod>
+    <lastmod>2018-09-10T08:23:37.880Z</lastmod>
     
   </url>
   
@@ -19,20 +33,6 @@
     <loc>https://xiaokegege.github.io/categories/index.html</loc>
     
     <lastmod>2018-09-07T07:31:12.727Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://xiaokegege.github.io/test/</loc>
-    
-    <lastmod>2018-07-18T06:58:29.321Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://xiaokegege.github.io/hello-world/</loc>
-    
-    <lastmod>2018-07-17T08:50:25.656Z</lastmod>
     
   </url>
   
